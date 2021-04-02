@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+progress[value]::-webkit-progress-bar {
+  background-color: whiteSmoke;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background-image: linear-gradient(to right, #ff8a00, #e52e71);
+  border-radius: 3px;
+  position: relative;
+  transition: width 1s linear;
+}
+</style>
+<body>
+    <h2>Streaming Video</h2>
+        <video width="300" height="300" controls id="video" 
+            src = "{{ url_for('static', filename='videoplayback (2).mp4') }}" type="video/mp4"></video>
+        <br>
+        <progress id="progress" max="100" value="0">Progress</progress>
+        <label id="timer" for="progress" role="timer"></label>
+          
+<script>
+const progress = document.getElementById("progress");
+const timer = document.getElementById("timer");
+
+function progressLoop() {
+  setInterval(function () {
+    progress.value = Math.round((video.currentTime / video.duration) * 100);
+    timer.innerHTML = Math.round((video.currentTime / video.duration) * 100) + "%";
+  });
+}
+
+progressLoop();
+</script>
+
+</body>
+</html>
